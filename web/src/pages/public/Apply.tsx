@@ -7,7 +7,8 @@ import { LoanDetailsStep } from '@/components/apply/LoanDetailsStep'
 import { ReviewStep } from '@/components/apply/ReviewStep'
 import { applicationsApi } from '@/api/client'
 import { Card, CardContent } from '@/components/ui/card'
-import { CheckCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { CheckCircle, ClipboardList, FileText, Bell, ArrowRight } from 'lucide-react'
 
 const STEPS = ['Personal Info', 'Loan Details', 'Review']
 
@@ -105,31 +106,66 @@ export function Apply() {
   }
 
   if (submitted) {
+    const portalUrl = applicationId
+      ? `/portal?applicationId=${applicationId}`
+      : '/portal'
+
     return (
       <div className="max-w-2xl mx-auto px-4 py-16">
         <Card>
-          <CardContent className="pt-6 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+          <CardContent className="pt-8 pb-8 text-center">
+            {/* Animated checkmark */}
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-[scale-in_0.4s_ease-out]">
+              <CheckCircle className="h-10 w-10 text-green-600 animate-[scale-in_0.5s_ease-out_0.1s_both]" />
             </div>
             <h2 className="text-2xl font-bold mb-2">Application Submitted!</h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-8 max-w-md mx-auto">
               Thank you for your application. We've received your information and will be in touch
-              within 24 hours. You can check your application status in the borrower portal.
+              within 24 hours.
             </p>
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={() => navigate('/portal')}
-                className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-medium hover:bg-primary/90"
-              >
+
+            {/* What happens next */}
+            <div className="bg-muted/50 rounded-lg p-6 mb-8 text-left">
+              <h3 className="font-semibold text-sm mb-4 text-center">What Happens Next</h3>
+              <div className="space-y-4">
+                {[
+                  {
+                    icon: ClipboardList,
+                    title: 'We review your application',
+                    desc: 'Our team will review your information within 24-48 hours.',
+                  },
+                  {
+                    icon: FileText,
+                    title: 'We may request documents',
+                    desc: "If we need additional documentation, you'll be notified in your portal.",
+                  },
+                  {
+                    icon: Bell,
+                    title: "You'll receive a decision",
+                    desc: "Once reviewed, you'll get a decision via email and in your portal.",
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <item.icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{item.title}</p>
+                      <p className="text-xs text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-3 justify-center">
+              <Button onClick={() => navigate(portalUrl)}>
                 Go to Portal
-              </button>
-              <button
-                onClick={() => navigate('/')}
-                className="border px-6 py-2 rounded-md font-medium hover:bg-muted"
-              >
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+              <Button variant="outline" onClick={() => navigate('/')}>
                 Return Home
-              </button>
+              </Button>
             </div>
           </CardContent>
         </Card>

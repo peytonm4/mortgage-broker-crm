@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { applicationsApi } from '@/api/client'
+import { cn } from '@/lib/utils'
+import { formatCurrency, formatDate, formatRelativeDate } from '@/lib/utils'
 import {
   FileText,
   Clock,
@@ -10,20 +13,108 @@ import {
   AlertCircle,
   ArrowRight,
   FileQuestion,
+  DollarSign,
+  CalendarDays,
+  ClipboardList,
+  Inbox,
+  Send,
+  XCircle,
+  Check,
+  AlertTriangle,
+  Phone,
+  Mail,
+  HelpCircle,
+  Building2,
+  Receipt,
+  FileCheck,
+  CreditCard,
 } from 'lucide-react'
+
+// ─── Status config ───────────────────────────────────────────────────────────
 
 const STATUS_CONFIG: Record<
   string,
-  { label: string; color: string; icon: React.ComponentType<{ className?: string }> }
+  {
+    label: string
+    color: string
+    icon: React.ComponentType<{ className?: string }>
+    subtitle: string
+  }
 > = {
-  Draft: { label: 'Draft', color: 'bg-gray-100 text-gray-800', icon: FileText },
-  Received: { label: 'Received', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  InReview: { label: 'In Review', color: 'bg-yellow-100 text-yellow-800', icon: Clock },
-  NeedsDocs: { label: 'Documents Needed', color: 'bg-orange-100 text-orange-800', icon: FileQuestion },
-  Submitted: { label: 'Submitted to Lender', color: 'bg-purple-100 text-purple-800', icon: CheckCircle },
-  Closed: { label: 'Closed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
-  Denied: { label: 'Denied', color: 'bg-red-100 text-red-800', icon: AlertCircle },
+  Draft: {
+    label: 'Draft',
+    color: 'bg-gray-100 text-gray-800',
+    icon: FileText,
+    subtitle: 'Your application is still in draft.',
+  },
+  Received: {
+    label: 'Received',
+    color: 'bg-blue-100 text-blue-800',
+    icon: Clock,
+    subtitle: "We've received your application and are getting started.",
+  },
+  InReview: {
+    label: 'In Review',
+    color: 'bg-yellow-100 text-yellow-800',
+    icon: Clock,
+    subtitle: 'Your application is being reviewed by our team.',
+  },
+  NeedsDocs: {
+    label: 'Documents Needed',
+    color: 'bg-orange-100 text-orange-800',
+    icon: FileQuestion,
+    subtitle: 'We need a few documents from you to continue.',
+  },
+  Submitted: {
+    label: 'Submitted to Lender',
+    color: 'bg-purple-100 text-purple-800',
+    icon: CheckCircle,
+    subtitle: 'Your application has been sent to the lender for final review.',
+  },
+  Closed: {
+    label: 'Closed',
+    color: 'bg-green-100 text-green-800',
+    icon: CheckCircle,
+    subtitle: 'Congratulations! Your loan has been funded.',
+  },
+  Denied: {
+    label: 'Denied',
+    color: 'bg-red-100 text-red-800',
+    icon: AlertCircle,
+    subtitle: 'Unfortunately, your application was not approved.',
+  },
 }
+
+// ─── Progress steps ──────────────────────────────────────────────────────────
+
+const PROGRESS_STEPS = [
+  { key: 'Received', label: 'Received', icon: Inbox },
+  { key: 'InReview', label: 'In Review', icon: ClipboardList },
+  { key: 'Submitted', label: 'Submitted', icon: Send },
+  { key: 'Closed', label: 'Closed', icon: CheckCircle },
+] as const
+
+const STATUS_ORDER: Record<string, number> = {
+  Draft: -1,
+  Received: 0,
+  InReview: 1,
+  NeedsDocs: 1, // same visual position as InReview
+  Submitted: 2,
+  Closed: 3,
+  Denied: -2,
+}
+
+// ─── Doc category icon map ───────────────────────────────────────────────────
+
+const DOC_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
+  PayStubs: Receipt,
+  W2s: Building2,
+  TaxReturns: FileCheck,
+  BankStatements: CreditCard,
+  IdentificationDocuments: FileText,
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
 
 export function PortalDashboard() {
   const [searchParams] = useSearchParams()
@@ -41,10 +132,17 @@ export function PortalDashboard() {
     enabled: !!applicationId,
   })
 
+  // ── No application ──────────────────────────────────────────────────────
+
   if (!applicationId) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold">Welcome to Your Portal</h1>
+        <div className="rounded-xl bg-gradient-to-r from-primary to-primary/80 p-8 text-primary-foreground">
+          <h1 className="text-2xl font-bold mb-2">Welcome to Your Portal</h1>
+          <p className="text-primary-foreground/80">
+            Start a mortgage application to track your progress here.
+          </p>
+        </div>
         <Card>
           <CardContent className="py-12 text-center">
             <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
@@ -52,34 +150,44 @@ export function PortalDashboard() {
             <p className="text-muted-foreground mb-6">
               Start a new mortgage application to track your progress here.
             </p>
-            <Link
-              to="/apply"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2 rounded-md font-medium hover:bg-primary/90"
-            >
-              Start Application
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <Button asChild size="lg">
+              <Link to="/apply">
+                Start Application
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       </div>
     )
   }
 
+  // ── Loading ─────────────────────────────────────────────────────────────
+
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <div className="h-8 w-48 bg-muted animate-pulse rounded" />
-        <Card>
-          <CardContent className="py-8">
-            <div className="animate-pulse space-y-4">
-              <div className="h-4 w-32 bg-muted rounded" />
-              <div className="h-8 w-48 bg-muted rounded" />
-            </div>
-          </CardContent>
-        </Card>
+        <div className="rounded-xl bg-gradient-to-r from-primary to-primary/80 p-8">
+          <div className="h-7 w-64 bg-primary-foreground/20 animate-pulse rounded" />
+          <div className="h-5 w-80 bg-primary-foreground/10 animate-pulse rounded mt-3" />
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {[1, 2, 3].map((i) => (
+            <Card key={i}>
+              <CardContent className="py-6">
+                <div className="animate-pulse space-y-2">
+                  <div className="h-4 w-16 bg-muted rounded" />
+                  <div className="h-8 w-24 bg-muted rounded" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     )
   }
+
+  // ── Not found ───────────────────────────────────────────────────────────
 
   if (!application) {
     return (
@@ -96,59 +204,225 @@ export function PortalDashboard() {
     )
   }
 
+  // ── Derived data ────────────────────────────────────────────────────────
+
   const statusConfig = STATUS_CONFIG[application.status] || STATUS_CONFIG.Draft
-  const StatusIcon = statusConfig.icon
   const pendingDocs = docRequests?.filter((d) => d.status === 'Pending') || []
+  const fulfilledDocs = docRequests?.filter((d) => d.status === 'Fulfilled') || []
+  const allDocs = [...pendingDocs, ...fulfilledDocs]
+  const currentStepIndex = STATUS_ORDER[application.status] ?? -1
+  const isDenied = application.status === 'Denied'
+
+  const daysSinceSubmission = application.submittedAt
+    ? Math.floor(
+        (Date.now() - new Date(application.submittedAt).getTime()) / (1000 * 60 * 60 * 24)
+      )
+    : null
+
+  const firstName = application.borrower?.firstName || 'there'
+
+  // ── Render ──────────────────────────────────────────────────────────────
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Application Dashboard</h1>
+      {/* ── Welcome Banner ──────────────────────────────────────────── */}
+      <div className="rounded-xl bg-gradient-to-r from-primary to-primary/80 p-6 md:p-8 text-primary-foreground">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1">
+          Welcome back, {firstName}
+        </h1>
+        <p className="text-primary-foreground/80 text-sm md:text-base">
+          {statusConfig.subtitle}
+        </p>
+      </div>
 
-      {/* Status Card */}
+      {/* ── Progress Tracker ────────────────────────────────────────── */}
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Application Status</CardTitle>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Application Progress</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center gap-4">
-            <div className={`p-3 rounded-full ${statusConfig.color}`}>
-              <StatusIcon className="h-6 w-6" />
-            </div>
-            <div>
-              <Badge className={statusConfig.color}>{statusConfig.label}</Badge>
-              <p className="text-sm text-muted-foreground mt-1">
-                {application.status === 'Received' &&
-                  "We've received your application and are reviewing it."}
-                {application.status === 'InReview' &&
-                  'Your application is being reviewed by our team.'}
-                {application.status === 'NeedsDocs' &&
-                  'Please provide the requested documents below.'}
-                {application.status === 'Submitted' &&
-                  'Your application has been submitted to the lender.'}
-                {application.status === 'Closed' && 'Congratulations! Your loan has been funded.'}
-                {application.status === 'Denied' &&
-                  'Unfortunately, your application was not approved.'}
-              </p>
-            </div>
+          {/* Desktop: horizontal stepper */}
+          <div className="hidden sm:flex items-center justify-between">
+            {PROGRESS_STEPS.map((step, idx) => {
+              const StepIcon = step.icon
+              const isCompleted = !isDenied && currentStepIndex > idx
+              const isCurrent = !isDenied && currentStepIndex === idx
+              const isWarning = isCurrent && application.status === 'NeedsDocs'
+
+              return (
+                <div key={step.key} className="flex items-center flex-1 last:flex-initial">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={cn(
+                        'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
+                        isCompleted && 'bg-primary text-primary-foreground',
+                        isCurrent && !isWarning && 'bg-primary text-primary-foreground ring-4 ring-primary/20',
+                        isCurrent && isWarning && 'bg-orange-500 text-white ring-4 ring-orange-200',
+                        isDenied && idx === 0 && 'bg-red-500 text-white',
+                        !isCompleted && !isCurrent && !isDenied && 'bg-muted text-muted-foreground',
+                        isDenied && idx > 0 && 'bg-muted text-muted-foreground'
+                      )}
+                    >
+                      {isCompleted ? (
+                        <Check className="h-5 w-5" />
+                      ) : isDenied && idx === 0 ? (
+                        <XCircle className="h-5 w-5" />
+                      ) : isWarning ? (
+                        <AlertTriangle className="h-5 w-5" />
+                      ) : (
+                        <StepIcon className="h-5 w-5" />
+                      )}
+                    </div>
+                    <span
+                      className={cn(
+                        'text-xs mt-2 font-medium whitespace-nowrap',
+                        (isCompleted || isCurrent) && !isDenied && 'text-primary',
+                        isDenied && idx === 0 && 'text-red-600',
+                        !isCompleted && !isCurrent && 'text-muted-foreground'
+                      )}
+                    >
+                      {isDenied && idx === 0 ? 'Denied' : step.label}
+                    </span>
+                  </div>
+                  {idx < PROGRESS_STEPS.length - 1 && (
+                    <div
+                      className={cn(
+                        'flex-1 h-1 mx-3 rounded-full transition-colors',
+                        !isDenied && currentStepIndex > idx ? 'bg-primary' : 'bg-muted'
+                      )}
+                    />
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Mobile: vertical stepper */}
+          <div className="sm:hidden space-y-3">
+            {PROGRESS_STEPS.map((step, idx) => {
+              const StepIcon = step.icon
+              const isCompleted = !isDenied && currentStepIndex > idx
+              const isCurrent = !isDenied && currentStepIndex === idx
+              const isWarning = isCurrent && application.status === 'NeedsDocs'
+
+              return (
+                <div key={step.key} className="flex items-center gap-3">
+                  <div
+                    className={cn(
+                      'w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all',
+                      isCompleted && 'bg-primary text-primary-foreground',
+                      isCurrent && !isWarning && 'bg-primary text-primary-foreground ring-2 ring-primary/20',
+                      isCurrent && isWarning && 'bg-orange-500 text-white ring-2 ring-orange-200',
+                      isDenied && idx === 0 && 'bg-red-500 text-white',
+                      !isCompleted && !isCurrent && !isDenied && 'bg-muted text-muted-foreground',
+                      isDenied && idx > 0 && 'bg-muted text-muted-foreground'
+                    )}
+                  >
+                    {isCompleted ? (
+                      <Check className="h-4 w-4" />
+                    ) : isDenied && idx === 0 ? (
+                      <XCircle className="h-4 w-4" />
+                    ) : isWarning ? (
+                      <AlertTriangle className="h-4 w-4" />
+                    ) : (
+                      <StepIcon className="h-4 w-4" />
+                    )}
+                  </div>
+                  <span
+                    className={cn(
+                      'text-sm font-medium',
+                      (isCompleted || isCurrent) && !isDenied && 'text-foreground',
+                      isDenied && idx === 0 && 'text-red-600',
+                      !isCompleted && !isCurrent && 'text-muted-foreground'
+                    )}
+                  >
+                    {isDenied && idx === 0 ? 'Denied' : step.label}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </CardContent>
       </Card>
 
-      {/* Document Requests */}
-      {pendingDocs.length > 0 && (
-        <Card className="border-orange-200 bg-orange-50">
+      {/* ── Quick Stats Row ─────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Card className="border-l-4 border-l-primary">
+          <CardContent className="py-5">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <DollarSign className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                  Loan Amount
+                </p>
+                <p className="text-xl font-bold">{formatCurrency(application.loanAmount)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-l-4 border-l-blue-500">
+          <CardContent className="py-5">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-blue-500/10">
+                <CalendarDays className="h-5 w-5 text-blue-500" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                  {daysSinceSubmission !== null ? 'Days Since Submission' : 'Submitted'}
+                </p>
+                <p className="text-xl font-bold">
+                  {daysSinceSubmission !== null ? daysSinceSubmission : 'Pending'}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className={cn('border-l-4', pendingDocs.length > 0 ? 'border-l-orange-500' : 'border-l-green-500')}>
+          <CardContent className="py-5">
+            <div className="flex items-center gap-3">
+              <div className={cn(
+                'p-2 rounded-lg',
+                pendingDocs.length > 0 ? 'bg-orange-500/10' : 'bg-green-500/10'
+              )}>
+                <FileQuestion className={cn(
+                  'h-5 w-5',
+                  pendingDocs.length > 0 ? 'text-orange-500' : 'text-green-500'
+                )} />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                  Pending Documents
+                </p>
+                <p className="text-xl font-bold">{pendingDocs.length}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* ── Document Requests ───────────────────────────────────────── */}
+      {allDocs.length > 0 && (
+        <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <FileQuestion className="h-5 w-5 text-orange-600" />
-              Documents Needed
+              <ClipboardList className="h-5 w-5 text-primary" />
+              Document Requests
+              {pendingDocs.length > 0 && (
+                <Badge className="bg-orange-100 text-orange-800 ml-auto">
+                  {pendingDocs.length} pending
+                </Badge>
+              )}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Please provide the following documents to continue processing your application:
-            </p>
             <ul className="space-y-3">
-              {pendingDocs.map((doc) => {
+              {allDocs.map((doc) => {
+                const isPending = doc.status === 'Pending'
+                const DocIcon = DOC_ICON[doc.category] || FileText
                 const partyLabels: Record<string, string> = {
                   Borrower: 'You',
                   Broker: 'Broker',
@@ -156,93 +430,163 @@ export function PortalDashboard() {
                   Appraiser: 'Appraiser',
                 }
                 const partyLabel = partyLabels[doc.responsibleParty] || doc.responsibleParty
+
                 return (
-                  <li key={doc.id} className="flex items-start gap-3 p-3 bg-background rounded-md">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2" />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">{doc.category}</span>
-                        <Badge className="bg-blue-100 text-blue-800 text-xs">{partyLabel}</Badge>
+                  <li
+                    key={doc.id}
+                    className={cn(
+                      'flex items-start gap-3 p-3 rounded-lg border transition-colors',
+                      isPending ? 'bg-orange-50/50 border-orange-200' : 'bg-green-50/50 border-green-200'
+                    )}
+                  >
+                    <div className={cn(
+                      'p-2 rounded-lg shrink-0 mt-0.5',
+                      isPending ? 'bg-orange-100' : 'bg-green-100'
+                    )}>
+                      <DocIcon className={cn(
+                        'h-4 w-4',
+                        isPending ? 'text-orange-600' : 'text-green-600'
+                      )} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-medium text-sm">{doc.category}</span>
+                        <Badge className={cn(
+                          'text-xs',
+                          isPending ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'
+                        )}>
+                          {isPending ? 'Pending' : 'Fulfilled'}
+                        </Badge>
+                        <Badge variant="outline" className="text-xs">
+                          {partyLabel}
+                        </Badge>
                       </div>
                       {doc.message && (
-                        <p className="text-sm text-muted-foreground">{doc.message}</p>
+                        <p className="text-sm text-muted-foreground mt-1">{doc.message}</p>
                       )}
                     </div>
                   </li>
                 )
               })}
             </ul>
-            <p className="text-xs text-muted-foreground mt-4">
-              Document upload functionality coming soon. Please contact us at (555) 123-4567 to
-              submit documents.
-            </p>
+            {pendingDocs.length > 0 && (
+              <div className="mt-4 p-3 rounded-lg bg-muted/50 flex items-start gap-2">
+                <HelpCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                <p className="text-xs text-muted-foreground">
+                  To submit documents, please contact us at{' '}
+                  <a href="tel:5551234567" className="font-medium text-primary hover:underline">
+                    (555) 123-4567
+                  </a>{' '}
+                  or email{' '}
+                  <a href="mailto:support@homeloanpro.com" className="font-medium text-primary hover:underline">
+                    support@homeloanpro.com
+                  </a>
+                  . Online upload coming soon.
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
 
-      {/* Loan Summary */}
+      {/* ── Loan Summary ────────────────────────────────────────────── */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Loan Summary</CardTitle>
+          <CardTitle className="text-base flex items-center gap-2">
+            <DollarSign className="h-5 w-5 text-primary" />
+            Loan Summary
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <dl className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <dt className="text-muted-foreground">Loan Type</dt>
-              <dd className="font-medium">{application.loanType}</dd>
+          <dl className="grid md:grid-cols-2 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-muted">
+                <FileText className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <div>
+                <dt className="text-xs text-muted-foreground">Loan Type</dt>
+                <dd className="font-medium text-sm">{application.loanType}</dd>
+              </div>
             </div>
-            <div>
-              <dt className="text-muted-foreground">Loan Amount</dt>
-              <dd className="font-medium">
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                  maximumFractionDigits: 0,
-                }).format(application.loanAmount)}
-              </dd>
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-muted">
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <div>
+                <dt className="text-xs text-muted-foreground">Loan Amount</dt>
+                <dd className="font-medium text-sm">{formatCurrency(application.loanAmount)}</dd>
+              </div>
             </div>
             {application.propertyCity && (
-              <div>
-                <dt className="text-muted-foreground">Property Location</dt>
-                <dd className="font-medium">
-                  {application.propertyCity}, {application.propertyState}
-                </dd>
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-muted">
+                  <Building2 className="h-4 w-4 text-muted-foreground" />
+                </div>
+                <div>
+                  <dt className="text-xs text-muted-foreground">Property Location</dt>
+                  <dd className="font-medium text-sm">
+                    {application.propertyCity}, {application.propertyState}
+                  </dd>
+                </div>
               </div>
             )}
-            <div>
-              <dt className="text-muted-foreground">Submitted</dt>
-              <dd className="font-medium">
-                {application.submittedAt
-                  ? new Date(application.submittedAt).toLocaleDateString()
-                  : 'Not submitted'}
-              </dd>
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-muted">
+                <CalendarDays className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <div>
+                <dt className="text-xs text-muted-foreground">Submitted</dt>
+                <dd className="font-medium text-sm">
+                  {application.submittedAt ? formatDate(application.submittedAt) : 'Not submitted'}
+                </dd>
+              </div>
             </div>
           </dl>
         </CardContent>
       </Card>
 
-      {/* Quick Actions */}
+      {/* ── Help / Contact ──────────────────────────────────────────── */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Need Help?</CardTitle>
+          <CardTitle className="text-base flex items-center gap-2">
+            <HelpCircle className="h-5 w-5 text-primary" />
+            Need Help?
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground mb-4">
-            Our team is here to help you through the process. Contact us anytime.
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Our team is here to help you through every step. Reach out anytime.
           </p>
-          <div className="flex gap-4">
-            <a
-              href="tel:5551234567"
-              className="text-sm text-primary hover:underline flex items-center gap-1"
-            >
-              Call (555) 123-4567
-            </a>
-            <a
-              href="mailto:support@homeloanpro.com"
-              className="text-sm text-primary hover:underline flex items-center gap-1"
-            >
-              Email Support
-            </a>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="outline" asChild>
+              <a href="tel:5551234567">
+                <Phone className="h-4 w-4 mr-2" />
+                (555) 123-4567
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="mailto:support@homeloanpro.com">
+                <Mail className="h-4 w-4 mr-2" />
+                Email Support
+              </a>
+            </Button>
+          </div>
+
+          {/* What to expect */}
+          <div className="border-t pt-4 mt-4">
+            <h4 className="text-sm font-medium mb-3">What to Expect</h4>
+            <div className="space-y-3">
+              {[
+                { q: 'How long does review take?', a: 'Most applications are reviewed within 24-48 hours.' },
+                { q: 'What if documents are needed?', a: "We'll notify you here and via email with exactly what's required." },
+                { q: 'When will I get a decision?', a: 'After review and document verification, you\'ll receive a decision via email and in your portal.' },
+              ].map((item) => (
+                <div key={item.q} className="text-sm">
+                  <p className="font-medium">{item.q}</p>
+                  <p className="text-muted-foreground">{item.a}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>

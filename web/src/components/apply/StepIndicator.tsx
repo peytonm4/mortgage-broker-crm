@@ -19,9 +19,9 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
             <div className="flex flex-col items-center">
               <div
                 className={cn(
-                  'w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-colors',
+                  'w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all duration-300',
                   isCompleted && 'bg-primary text-primary-foreground',
-                  isCurrent && 'bg-primary text-primary-foreground',
+                  isCurrent && 'bg-primary text-primary-foreground scale-110 ring-4 ring-primary/20',
                   !isCompleted && !isCurrent && 'bg-muted text-muted-foreground'
                 )}
               >
@@ -29,7 +29,7 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
               </div>
               <span
                 className={cn(
-                  'text-xs mt-2 font-medium',
+                  'text-xs mt-2 font-medium transition-colors duration-300',
                   (isCompleted || isCurrent) && 'text-primary',
                   !isCompleted && !isCurrent && 'text-muted-foreground'
                 )}
@@ -40,7 +40,7 @@ export function StepIndicator({ currentStep, steps }: StepIndicatorProps) {
             {index < steps.length - 1 && (
               <div
                 className={cn(
-                  'w-16 h-1 mx-2 rounded',
+                  'w-16 h-1.5 mx-2 rounded-full transition-colors duration-300',
                   currentStep > stepNumber ? 'bg-primary' : 'bg-muted'
                 )}
               />
