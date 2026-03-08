@@ -50,12 +50,39 @@ The frontend runs at **http://localhost:5173** and proxies `/api` requests to th
 
 ## Key URLs
 
+### Public Site
 | URL | Description |
 |-----|-------------|
-| http://localhost:5173 | Public home page |
+| http://localhost:5173 | Home page |
 | http://localhost:5173/apply | Borrower application form |
-| http://localhost:5173/portal?applicationId=`<id>` | Borrower portal dashboard |
-| http://localhost:5173/crm | Staff CRM / pipeline |
+| http://localhost:5173/privacy | Privacy policy |
+| http://localhost:5173/terms | Terms of service |
+
+### Borrower Portal
+| URL | Description |
+|-----|-------------|
+| http://localhost:5173/portal | Portal dashboard |
+| http://localhost:5173/portal/application | Application view |
+
+### Staff CRM
+| URL | Description |
+|-----|-------------|
+| http://localhost:5173/crm | Dashboard |
+| http://localhost:5173/crm/partners | Partners list |
+| http://localhost:5173/crm/partners/new | New partner form |
+| http://localhost:5173/crm/partners/:id | Partner detail |
+| http://localhost:5173/crm/partners/:id/edit | Edit partner |
+| http://localhost:5173/crm/leads | Leads list |
+| http://localhost:5173/crm/leads/new | New lead form |
+| http://localhost:5173/crm/leads/:id | Lead detail |
+| http://localhost:5173/crm/leads/:id/edit | Edit lead |
+| http://localhost:5173/crm/funded | Funded loans |
+| http://localhost:5173/crm/pipeline | Pipeline |
+| http://localhost:5173/crm/pipeline/:id | Application detail |
+
+### API
+| URL | Description |
+|-----|-------------|
 | http://localhost:5000/api | API base URL |
 
 ## Project Structure
