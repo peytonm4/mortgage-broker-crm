@@ -55,7 +55,7 @@ No accent / gold color — single green palette only.
 
 ## Palette 2 — Emerald + Gold (Startup Feel)
 **Date:** 2026-03-08
-**Status:** Active
+**Status:** Superseded
 
 Defined by user as:
 ```
@@ -104,3 +104,65 @@ Hardcoded values in components:
 | Footer border | `#2F9E5A` | — |
 | Logo text | `#50C878` | — |
 | Input focus ring | `#50C878` | — |
+
+---
+
+## Palette 3 — Navy + Gold (Premium, Professional)
+**Date:** 2026-03-08
+**Status:** Active
+
+Defined by user as:
+```
+Primary: #1F3A5F / Dark: #152A45 / Light: #DCE6F2
+Accent:  #FFC145 / Dark: #D99A17 / Light: #FFF1CC
+Background: #F7F9FC | Surface: #FFFFFF | Alt: #EEF3F8
+Text: #16202B / Secondary: #5F6B78 | Border: #D8E0EA
+Support (success only): #50C878
+```
+
+CSS variables (`web/src/index.css`):
+| Variable | Value |
+|---|---|
+| `--color-background` | `#F7F9FC` |
+| `--color-foreground` | `#16202B` |
+| `--color-card` | `#FFFFFF` |
+| `--color-card-foreground` | `#16202B` |
+| `--color-primary` | `#1F3A5F` |
+| `--color-primary-foreground` | `#FFFFFF` |
+| `--color-secondary` | `#EEF3F8` |
+| `--color-secondary-foreground` | `#16202B` |
+| `--color-muted` | `#EEF3F8` |
+| `--color-muted-foreground` | `#5F6B78` |
+| `--color-accent` | `#FFC145` |
+| `--color-accent-foreground` | `#16202B` |
+| `--color-border` | `#D8E0EA` |
+| `--color-input` | `#D8E0EA` |
+| `--color-ring` | `#1F3A5F` |
+
+Hardcoded values in components:
+| Element | Color | Hover |
+|---|---|---|
+| Nav bar background | `#1F3A5F` | — |
+| Footer background | `#152A45` | — |
+| LOG IN button | `#1F3A5F` | `#152A45` |
+| REGISTER button | `#FFC145` | `#D99A17` |
+| Hero "Existing Customers" button | `#1F3A5F` | `#152A45` |
+| Hero "View Live Rates" button | `#FFC145` | `#D99A17` |
+| Hero "Apply Now" button | `#FFC145` | `#D99A17` |
+| Info strip background | `#FFC145` | — |
+| CTA section background | `#1F3A5F` | — |
+| CTA "Apply Now" button | `#FFC145` | `#D99A17` |
+| Step number circles | `#1F3A5F` | — |
+| CheckCircle icons | `#50C878` (support color) | — |
+| Nav hover | — | `#FFC145` |
+| Footer sub-text | `#DCE6F2` | — |
+| Footer border | `#1F3A5F` | — |
+| Logo text | `#1F3A5F` | — |
+| Input focus ring | `#1F3A5F` | — |
+| Hero overlay | `#1F3A5F/50` | — |
+| Hero headline | `#FFFFFF` | — |
+| Hero subtext | `#DCE6F2` | — |
+
+Hero image: `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80`
+(Modern luxury home exterior, white/stone facade with landscaping — confirmed working)
+Note: `photo-G48h926L2qo` (modern luxury home at dusk) was attempted first but newer alphanumeric Unsplash IDs require API auth to hotlink — only older numeric-format IDs work directly.

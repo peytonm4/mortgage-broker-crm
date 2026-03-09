@@ -10,23 +10,23 @@ export function Home() {
         className="relative min-h-[580px] flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80)',
+            'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80)',
         }}
       >
         {/* subtle light overlay so text pops without killing the photo */}
-        <div className="absolute inset-0 bg-white/30" />
+        <div className="absolute inset-0 bg-[#1F3A5F]/50" />
 
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 drop-shadow-sm mb-3">
+          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-sm mb-3">
             Low Rates. Great Service.
           </h1>
-          <p className="text-xl md:text-2xl text-gray-800 mb-10">
+          <p className="text-xl md:text-2xl text-[#DCE6F2] mb-10">
             Home Purchase &amp; Refinance Loans
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/portal"
-              className="bg-[#2F9E5A] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#1E2A22] transition-colors uppercase"
+              className="bg-[#FFC145] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#D99A17] transition-colors uppercase"
             >
               Existing Customers
             </Link>
@@ -117,7 +117,7 @@ export function Home() {
               { title: 'HELOC', desc: 'Home equity lines of credit' },
               { title: 'Conventional', desc: 'Traditional fixed-rate mortgages' },
             ].map((loan) => (
-              <div key={loan.title} className="bg-background p-6 rounded-lg border hover:border-[#50C878] transition-colors">
+              <div key={loan.title} className="bg-background p-6 rounded-lg border hover:border-[#1F3A5F] transition-colors">
                 <h3 className="font-semibold mb-2">{loan.title}</h3>
                 <p className="text-sm text-muted-foreground">{loan.desc}</p>
               </div>
@@ -138,7 +138,7 @@ export function Home() {
               { step: '4', title: 'Close & Move In', desc: 'We handle the paperwork, you get the keys' },
             ].map((item) => (
               <div key={item.step} className="text-center">
-                <div className="w-12 h-12 bg-[#2F9E5A] text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                <div className="w-12 h-12 bg-[#1F3A5F] text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
                   {item.step}
                 </div>
                 <h3 className="font-semibold mb-2">{item.title}</h3>
@@ -150,7 +150,7 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#2F9E5A] text-white">
+      <section className="py-16 bg-[#1F3A5F] text-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">

@@ -8,7 +8,7 @@ export function PublicLayout() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-serif font-bold tracking-widest text-[#50C878] uppercase">
+            <span className="text-2xl font-serif font-bold tracking-widest text-[#1F3A5F] uppercase">
               HomeLoan Pro
             </span>
           </Link>
@@ -16,16 +16,16 @@ export function PublicLayout() {
             <input
               type="text"
               placeholder="Username"
-              className="border rounded px-3 py-1.5 text-sm w-36 focus:outline-none focus:ring-1 focus:ring-[#50C878]"
+              className="border rounded px-3 py-1.5 text-sm w-36 focus:outline-none focus:ring-1 focus:ring-[#1F3A5F]"
             />
             <input
               type="password"
               placeholder="Password"
-              className="border rounded px-3 py-1.5 text-sm w-36 focus:outline-none focus:ring-1 focus:ring-[#50C878]"
+              className="border rounded px-3 py-1.5 text-sm w-36 focus:outline-none focus:ring-1 focus:ring-[#1F3A5F]"
             />
             <Link
               to="/portal"
-              className="bg-[#2F9E5A] text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-[#1E2A22] transition-colors"
+              className="bg-[#1F3A5F] text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-[#152A45] transition-colors"
             >
               LOG IN
             </Link>
@@ -40,7 +40,7 @@ export function PublicLayout() {
       </div>
 
       {/* Nav bar — dark green */}
-      <nav className="bg-[#2F9E5A]">
+      <nav className="bg-[#1F3A5F]">
         <div className="max-w-7xl mx-auto px-4 h-10 flex items-center gap-8">
           {[
             { label: 'BUY A HOME', to: '/apply' },
@@ -66,45 +66,45 @@ export function PublicLayout() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#1E2A22] text-white">
+      <footer className="bg-[#152A45] text-white">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <span className="font-serif font-bold text-lg tracking-widest uppercase">HomeLoan Pro</span>
-              <p className="text-sm text-[#DDF7E7] mt-3">
+              <p className="text-sm text-[#DCE6F2] mt-3">
                 Your trusted mortgage partner for home purchases, refinancing, and more.
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/" className="text-[#DDF7E7] hover:text-white">Home</Link></li>
-                <li><Link to="/apply" className="text-[#DDF7E7] hover:text-white">Apply Now</Link></li>
-                <li><Link to="/portal" className="text-[#DDF7E7] hover:text-white">Check Application Status</Link></li>
+                <li><Link to="/" className="text-[#DCE6F2] hover:text-white">Home</Link></li>
+                <li><Link to="/apply" className="text-[#DCE6F2] hover:text-white">Apply Now</Link></li>
+                <li><Link to="/portal" className="text-[#DCE6F2] hover:text-white">Check Application Status</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/privacy" className="text-[#DDF7E7] hover:text-white">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="text-[#DDF7E7] hover:text-white">Terms of Service</Link></li>
+                <li><Link to="/privacy" className="text-[#DCE6F2] hover:text-white">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="text-[#DCE6F2] hover:text-white">Terms of Service</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase">Contact</h4>
               <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2 text-[#DDF7E7]">
+                <li className="flex items-center gap-2 text-[#DCE6F2]">
                   <Phone className="h-4 w-4" />
                   (555) 123-4567
                 </li>
-                <li className="flex items-center gap-2 text-[#DDF7E7]">
+                <li className="flex items-center gap-2 text-[#DCE6F2]">
                   <Mail className="h-4 w-4" />
                   info@homeloanpro.com
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-[#2F9E5A] mt-8 pt-8 text-center text-sm text-[#DDF7E7]">
+          <div className="border-t border-[#1F3A5F] mt-8 pt-8 text-center text-sm text-[#DCE6F2]">
             © {new Date().getFullYear()} HomeLoan Pro. All rights reserved. NMLS #123456
           </div>
         </div>
