@@ -478,8 +478,8 @@ export function PortalDashboard() {
                     (555) 123-4567
                   </a>{' '}
                   or email{' '}
-                  <a href="mailto:support@homeloanpro.com" className="font-medium text-primary hover:underline">
-                    support@homeloanpro.com
+                  <a href="mailto:support@onecommunity.mortgage" className="font-medium text-primary hover:underline">
+                    support@onecommunity.mortgage
                   </a>
                   . Online upload coming soon.
                 </p>
@@ -565,7 +565,7 @@ export function PortalDashboard() {
               </a>
             </Button>
             <Button variant="outline" asChild>
-              <a href="mailto:support@homeloanpro.com">
+              <a href="mailto:support@onecommunity.mortgage">
                 <Mail className="h-4 w-4 mr-2" />
                 Email Support
               </a>

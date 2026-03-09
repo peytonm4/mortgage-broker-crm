@@ -23,27 +23,51 @@ public static class ApplicationEndpoints
         StartApplicationRequest request,
         AppDbContext db)
     {
-        // Create user account for borrower
-        var user = new User
-        {
-            Id = Guid.NewGuid(),
-            Email = request.Email,
-            PasswordHash = "temp", // Would generate secure temp password in production
-            Role = UserRole.Borrower
-        };
+        // Reuse existing user if email already registered
+        var existingUser = await db.Users
+            .Include(u => u.Borrower)
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
 
-        // Create borrower profile
-        var borrower = new Borrower
-        {
-            Id = Guid.NewGuid(),
-            UserId = user.Id,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            Phone = request.Phone
-        };
+        User user;
+        Borrower borrower;
 
-        // Create loan application
+        if (existingUser is not null)
+        {
+            user = existingUser;
+            borrower = existingUser.Borrower ?? new Borrower
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                Phone = request.Phone
+            };
+            if (existingUser.Borrower is null)
+                db.Borrowers.Add(borrower);
+        }
+        else
+        {
+            user = new User
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email,
+                PasswordHash = "temp",
+                Role = UserRole.Borrower
+            };
+            borrower = new Borrower
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                Phone = request.Phone
+            };
+            db.Users.Add(user);
+            db.Borrowers.Add(borrower);
+        }
+
         var application = new LoanApplication
         {
             Id = Guid.NewGuid(),
@@ -54,8 +78,6 @@ public static class ApplicationEndpoints
             CurrentStep = 1
         };
 
-        db.Users.Add(user);
-        db.Borrowers.Add(borrower);
         db.LoanApplications.Add(application);
         await db.SaveChangesAsync();
 

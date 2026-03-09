@@ -146,7 +146,7 @@ export function ReviewStep({
             </div>
           </div>
           <span className="text-sm">
-            I certify that the information provided is true and accurate. I authorize HomeLoan Pro
+            I certify that the information provided is true and accurate. I authorize One Community Mortgage
             to verify my information and run a credit check. I have read and agree to the{' '}
             <a href="/terms" className="text-primary hover:underline">
               Terms of Service

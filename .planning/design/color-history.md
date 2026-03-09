@@ -109,7 +109,7 @@ Hardcoded values in components:
 
 ## Palette 3 — Navy + Gold (Premium, Professional)
 **Date:** 2026-03-08
-**Status:** Active
+**Status:** Superseded
 
 Defined by user as:
 ```
@@ -166,3 +166,64 @@ Hardcoded values in components:
 Hero image: `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80`
 (Modern luxury home exterior, white/stone facade with landscaping — confirmed working)
 Note: `photo-G48h926L2qo` (modern luxury home at dusk) was attempted first but newer alphanumeric Unsplash IDs require API auth to hotlink — only older numeric-format IDs work directly.
+
+---
+
+## Palette 4 — Deep Navy + Champagne Gold (One Community Mortgage)
+**Date:** 2026-03-09
+**Status:** Active
+
+Derived from the One Community Mortgage logo (deep navy background with champagne gold text/accents).
+
+Brand renamed from **HomeLoan Pro** → **One Community Mortgage**.
+
+```
+Primary: #0B1D3A / Dark: #071428 / Light: #C8D5E3
+Accent:  #C9A84C / Dark: #A8893D
+Background: #F5F7FA | Surface: #FFFFFF | Alt: #E8EDF3
+Text: #0F1923 / Secondary: #5A6775 | Border: #D1DAE5
+Support (success only): #50C878
+```
+
+CSS variables (`web/src/index.css`):
+| Variable | Value |
+|---|---|
+| `--color-background` | `#F5F7FA` |
+| `--color-foreground` | `#0F1923` |
+| `--color-card` | `#FFFFFF` |
+| `--color-card-foreground` | `#0F1923` |
+| `--color-primary` | `#0B1D3A` |
+| `--color-primary-foreground` | `#FFFFFF` |
+| `--color-secondary` | `#E8EDF3` |
+| `--color-secondary-foreground` | `#0F1923` |
+| `--color-muted` | `#E8EDF3` |
+| `--color-muted-foreground` | `#5A6775` |
+| `--color-accent` | `#C9A84C` |
+| `--color-accent-foreground` | `#0F1923` |
+| `--color-border` | `#D1DAE5` |
+| `--color-input` | `#D1DAE5` |
+| `--color-ring` | `#0B1D3A` |
+
+Hardcoded values in components:
+| Element | Color | Hover |
+|---|---|---|
+| Nav bar background | `#0B1D3A` | — |
+| Footer background | `#071428` | — |
+| LOG IN button | `#0B1D3A` | `#071428` |
+| REGISTER button | `#C9A84C` | `#A8893D` |
+| Hero buttons (all 3) | `#C9A84C` | `#A8893D` |
+| Info strip background | `#C9A84C` | — |
+| CTA section background | `#0B1D3A` | — |
+| CTA "Apply Now" button | `#C9A84C` | `#A8893D` |
+| Step number circles | `#0B1D3A` | — |
+| CheckCircle icons | `#50C878` (support color) | — |
+| Nav hover | — | `#C9A84C` |
+| Footer sub-text | `#C8D5E3` | — |
+| Footer border | `#0B1D3A` | — |
+| Logo text | `#0B1D3A` | — |
+| Input focus ring | `#0B1D3A` | — |
+| Hero overlay | `#0B1D3A/60` | — |
+| Hero headline | `#FFFFFF` | — |
+| Hero subtext | `#C8D5E3` | — |
+
+Hero image: `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80` (unchanged)

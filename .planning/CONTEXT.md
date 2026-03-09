@@ -65,6 +65,32 @@ See `.planning/design/color-history.md` for full details.
 - GitHub token needs to be regenerated (was exposed in chat) — update `~/.claude/mcp.json` once new token is available
 - Requires Claude Code restart to activate
 
+### 2026-03-09
+
+#### Hero Button Color Fix
+- "Existing Customers" hero button was `#1F3A5F` (navy); updated to `#FFC145` / hover `#D99A17` (gold) to match "View Live Rates" and "Apply Now" buttons
+- File: `web/src/pages/public/Home.tsx`
+
+#### Apply Wizard — "Continue to Loan Details" Bug Fixed
+- **Root cause:** `handleStep1` in `Apply.tsx` called `startMutation.mutateAsync` with no error handling; if the API threw, `setCurrentStep(2)` was never reached and the button appeared to do nothing
+- **Immediate cause:** `Users` table has a unique index on `Email` (see `AppDbContext.cs` line 81); submitting with an already-registered email caused a DB constraint violation
+- **Frontend fix:** Wrapped API calls in try/catch in both `handleStep1` and `handleStep2`; added `apiError` state that renders a red banner above the card on failure
+- **Backend fix:** `StartApplication` endpoint now checks for an existing user by email before inserting; reuses the existing `User`/`Borrower` record instead of creating a duplicate
+- Files: `web/src/pages/public/Apply.tsx`, `api/MortgageCrm.Api/Endpoints/ApplicationEndpoints.cs`
+
+#### Committed & Pushed
+- Commit `5681ce3` — Navy + Gold palette, CLAUDE.md, hero button color fix — pushed to `origin/master`
+
+### 2026-03-09 (continued)
+
+#### Rebrand to One Community Mortgage + Palette 4
+- **Brand renamed:** HomeLoan Pro → One Community Mortgage (all files updated)
+- **New palette applied:** Deep Navy + Champagne Gold (Palette 4), derived from One Community Mortgage logo
+- Primary `#0B1D3A` / Dark `#071428`, Accent `#C9A84C` / Dark `#A8893D`, Background `#F5F7FA`, Text `#0F1923`
+- Files updated: `index.css`, `PublicLayout.tsx`, `Home.tsx`, `PortalLayout.tsx`, `Layout.tsx`, `Terms.tsx`, `Privacy.tsx`, `ReviewStep.tsx`, `PortalDashboard.tsx`
+- Email domains changed: `homeloanpro.com` → `onecommunity.mortgage`
+- See `.planning/design/color-history.md` for full Palette 4 details
+
 ---
 
 ## Planning Docs
@@ -75,9 +101,9 @@ See `.planning/design/color-history.md` for full details.
 
 ## Decisions & Conventions
 
-- **Brand name:** HomeLoan Pro
+- **Brand name:** One Community Mortgage
 - **Font:** system-ui (no custom font loaded yet)
-- **Active color palette:** Palette 3 — Navy + Gold (see `.planning/design/color-history.md`)
+- **Active color palette:** Palette 4 — Deep Navy + Champagne Gold (see `.planning/design/color-history.md`)
 - **Hardcoded colors:** Nav/footer/buttons use hardcoded hex in JSX; CSS variables used for component library (cards, inputs, badges, etc.)
 - **No `.gitignore` additions** — user declined adding `*.pkg` to gitignore
 - **No GSD planning files** in this repo yet — no PROJECT.md, ROADMAP.md, or `.planning/phases/`

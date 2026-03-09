@@ -11,7 +11,7 @@ A full-stack mortgage broker CRM with three audiences:
 - **Borrower portal** — dashboard for tracking loan status and documents
 - **Staff CRM** — internal pipeline, partner, and lead management
 
-**Brand name:** HomeLoan Pro
+**Brand name:** One Community Mortgage
 
 ---
 
@@ -216,23 +216,23 @@ Tailwind CSS v4. Component library classes use CSS variables (e.g. `bg-primary`,
 
 ---
 
-## Color Palette — Navy + Gold (Active)
+## Color Palette — Deep Navy + Champagne Gold (Active)
 
 See `.planning/design/color-history.md` for full history and revert instructions for all past palettes.
 
 | Role | Hex |
 |---|---|
-| Primary | `#1F3A5F` |
-| Primary dark / hover | `#152A45` |
-| Primary light | `#DCE6F2` |
-| Accent / Gold | `#FFC145` |
-| Accent dark / hover | `#D99A17` |
-| Background | `#F7F9FC` |
+| Primary | `#0B1D3A` |
+| Primary dark / hover | `#071428` |
+| Primary light | `#C8D5E3` |
+| Accent / Champagne Gold | `#C9A84C` |
+| Accent dark / hover | `#A8893D` |
+| Background | `#F5F7FA` |
 | Surface | `#FFFFFF` |
-| Alt surface | `#EEF3F8` |
-| Text | `#16202B` |
-| Text secondary | `#5F6B78` |
-| Border | `#D8E0EA` |
+| Alt surface | `#E8EDF3` |
+| Text | `#0F1923` |
+| Text secondary | `#5A6775` |
+| Border | `#D1DAE5` |
 | Support / success only | `#50C878` |
 
 **Rules:**

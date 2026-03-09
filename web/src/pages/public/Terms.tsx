@@ -9,7 +9,7 @@ export function Terms() {
         <section>
           <h2 className="text-xl font-semibold mb-3">Acceptance of Terms</h2>
           <p className="text-muted-foreground">
-            By accessing and using HomeLoan Pro's services, you accept and agree to be bound by
+            By accessing and using One Community Mortgage's services, you accept and agree to be bound by
             these Terms of Service. If you do not agree to these terms, please do not use our
             services.
           </p>
@@ -18,7 +18,7 @@ export function Terms() {
         <section>
           <h2 className="text-xl font-semibold mb-3">Description of Services</h2>
           <p className="text-muted-foreground">
-            HomeLoan Pro provides mortgage brokerage services, connecting borrowers with lenders.
+            One Community Mortgage provides mortgage brokerage services, connecting borrowers with lenders.
             We help facilitate the mortgage application process but are not a direct lender. Final
             loan decisions are made by the lending institutions.
           </p>
@@ -49,7 +49,7 @@ export function Terms() {
         <section>
           <h2 className="text-xl font-semibold mb-3">Credit Checks</h2>
           <p className="text-muted-foreground">
-            By submitting an application, you authorize HomeLoan Pro and our lending partners to
+            By submitting an application, you authorize One Community Mortgage and our lending partners to
             obtain your credit report from one or more credit bureaus. This may affect your credit
             score.
           </p>
@@ -58,7 +58,7 @@ export function Terms() {
         <section>
           <h2 className="text-xl font-semibold mb-3">Fees and Costs</h2>
           <p className="text-muted-foreground">
-            HomeLoan Pro may receive compensation from lenders for loans that are funded. Any fees
+            One Community Mortgage may receive compensation from lenders for loans that are funded. Any fees
             associated with your mortgage will be clearly disclosed prior to closing. We are
             committed to transparency in all fee disclosures.
           </p>
@@ -67,7 +67,7 @@ export function Terms() {
         <section>
           <h2 className="text-xl font-semibold mb-3">Limitation of Liability</h2>
           <p className="text-muted-foreground">
-            HomeLoan Pro shall not be liable for any indirect, incidental, special, consequential,
+            One Community Mortgage shall not be liable for any indirect, incidental, special, consequential,
             or punitive damages arising out of your use of our services. Our liability is limited
             to the maximum extent permitted by law.
           </p>
@@ -96,7 +96,7 @@ export function Terms() {
             For questions about these Terms of Service, please contact us at:
           </p>
           <p className="text-muted-foreground mt-2">
-            Email: legal@homeloanpro.com
+            Email: legal@onecommunity.mortgage
             <br />
             Phone: (555) 123-4567
             <br />

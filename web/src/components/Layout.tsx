@@ -17,7 +17,7 @@ export function Layout() {
       <aside className="w-64 border-r bg-background flex flex-col">
         <div className="flex h-16 items-center border-b px-6">
           <Home className="h-6 w-6 text-primary" />
-          <span className="ml-2 text-lg font-semibold">Mortgage CRM</span>
+          <span className="ml-2 text-lg font-semibold">One Community CRM</span>
         </div>
         <nav className="p-4 space-y-1 flex-1">
           {navItems.map((item) => (

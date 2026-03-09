@@ -41,6 +41,7 @@ export function Apply() {
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData | null>(null)
   const [loanDetails, setLoanDetails] = useState<LoanDetailsData | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [apiError, setApiError] = useState<string | null>(null)
 
   const startMutation = useMutation({
     mutationFn: applicationsApi.start,
@@ -69,32 +70,43 @@ export function Apply() {
   })
 
   const handleStep1 = async (data: PersonalInfoData) => {
+    setApiError(null)
     setPersonalInfo(data)
 
-    if (!applicationId) {
-      // Start a new application
-      const result = await startMutation.mutateAsync({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone || undefined,
-      })
-      setApplicationId(result.applicationId)
-
-      // Update with full personal info
-      await updateStep1Mutation.mutateAsync({ id: result.applicationId, data })
-    } else {
-      await updateStep1Mutation.mutateAsync({ id: applicationId, data })
+    try {
+      if (!applicationId) {
+        const result = await startMutation.mutateAsync({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone || undefined,
+        })
+        setApplicationId(result.applicationId)
+        await updateStep1Mutation.mutateAsync({ id: result.applicationId, data })
+      } else {
+        await updateStep1Mutation.mutateAsync({ id: applicationId, data })
+      }
+    } catch {
+      setApiError('Unable to save your information. Please check your connection and try again.')
+      return
     }
 
     setCurrentStep(2)
   }
 
   const handleStep2 = async (data: LoanDetailsData) => {
+    setApiError(null)
     setLoanDetails(data)
-    if (applicationId) {
-      await updateStep2Mutation.mutateAsync({ id: applicationId, data })
+
+    try {
+      if (applicationId) {
+        await updateStep2Mutation.mutateAsync({ id: applicationId, data })
+      }
+    } catch {
+      setApiError('Unable to save loan details. Please check your connection and try again.')
+      return
     }
+
     setCurrentStep(3)
   }
 
@@ -183,6 +195,12 @@ export function Apply() {
       </div>
 
       <StepIndicator currentStep={currentStep} steps={STEPS} />
+
+      {apiError && (
+        <div className="mb-4 px-4 py-3 rounded bg-red-50 border border-red-200 text-red-700 text-sm">
+          {apiError}
+        </div>
+      )}
 
       <Card>
         <CardContent className="pt-6">

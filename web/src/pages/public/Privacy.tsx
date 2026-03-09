@@ -73,7 +73,7 @@ export function Privacy() {
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
           <p className="text-muted-foreground mt-2">
-            Email: privacy@homeloanpro.com
+            Email: privacy@onecommunity.mortgage
             <br />
             Phone: (555) 123-4567
             <br />

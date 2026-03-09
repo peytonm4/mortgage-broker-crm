@@ -13,32 +13,32 @@ export function Home() {
             'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80)',
         }}
       >
-        {/* subtle light overlay so text pops without killing the photo */}
-        <div className="absolute inset-0 bg-[#1F3A5F]/50" />
+        {/* subtle dark overlay so text pops */}
+        <div className="absolute inset-0 bg-[#0B1D3A]/60" />
 
         <div className="relative z-10 text-center px-4">
           <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-sm mb-3">
             Low Rates. Great Service.
           </h1>
-          <p className="text-xl md:text-2xl text-[#DCE6F2] mb-10">
+          <p className="text-xl md:text-2xl text-[#C8D5E3] mb-10">
             Home Purchase &amp; Refinance Loans
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/portal"
-              className="bg-[#FFC145] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#D99A17] transition-colors uppercase"
+              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
             >
               Existing Customers
             </Link>
             <Link
               to="/apply"
-              className="bg-[#FFC145] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#D99A17] transition-colors uppercase"
+              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
             >
               View Live Rates
             </Link>
             <Link
               to="/apply"
-              className="bg-[#FFC145] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#D99A17] transition-colors uppercase"
+              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
             >
               Apply Now
             </Link>
@@ -47,7 +47,7 @@ export function Home() {
       </section>
 
       {/* Bottom info strip */}
-      <div className="bg-[#FFC145] text-white py-3 px-4 flex items-center justify-between text-sm">
+      <div className="bg-[#C9A84C] text-white py-3 px-4 flex items-center justify-between text-sm">
         <span className="text-amber-100">
           Don't have an online account?{' '}
           <Link to="/apply" className="underline text-white hover:text-amber-200">
@@ -117,7 +117,7 @@ export function Home() {
               { title: 'HELOC', desc: 'Home equity lines of credit' },
               { title: 'Conventional', desc: 'Traditional fixed-rate mortgages' },
             ].map((loan) => (
-              <div key={loan.title} className="bg-background p-6 rounded-lg border hover:border-[#1F3A5F] transition-colors">
+              <div key={loan.title} className="bg-background p-6 rounded-lg border hover:border-[#0B1D3A] transition-colors">
                 <h3 className="font-semibold mb-2">{loan.title}</h3>
                 <p className="text-sm text-muted-foreground">{loan.desc}</p>
               </div>
@@ -138,7 +138,7 @@ export function Home() {
               { step: '4', title: 'Close & Move In', desc: 'We handle the paperwork, you get the keys' },
             ].map((item) => (
               <div key={item.step} className="text-center">
-                <div className="w-12 h-12 bg-[#1F3A5F] text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                <div className="w-12 h-12 bg-[#0B1D3A] text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
                   {item.step}
                 </div>
                 <h3 className="font-semibold mb-2">{item.title}</h3>
@@ -150,7 +150,7 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#1F3A5F] text-white">
+      <section className="py-16 bg-[#0B1D3A] text-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
@@ -159,7 +159,7 @@ export function Home() {
           </p>
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 bg-[#FFC145] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#D99A17] transition-colors uppercase tracking-widest text-sm"
+            className="inline-flex items-center gap-2 bg-[#C9A84C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#A8893D] transition-colors uppercase tracking-widest text-sm"
           >
             Apply Now
           </Link>
