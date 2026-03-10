@@ -218,8 +218,6 @@ Tailwind CSS v4. Component library classes use CSS variables (e.g. `bg-primary`,
 
 ## Color Palette — Deep Navy + Champagne Gold (Active)
 
-See `.planning/design/color-history.md` for full history and revert instructions for all past palettes.
-
 | Role | Hex |
 |---|---|
 | Primary | `#0B1D3A` |
@@ -273,7 +271,6 @@ Always consult and update these when making significant changes:
 |---|---|
 | `.planning/CONTEXT.md` | Running log of all session decisions and changes |
 | `.planning/BACKLOG.md` | Feature backlog by area |
-| `.planning/design/color-history.md` | Every palette with all hex values + revert instructions |
 
 ---
 
@@ -286,8 +283,7 @@ At the start of each session:
 
 At the end of a significant session:
 1. Update `.planning/CONTEXT.md` with what changed
-2. Update `color-history.md` if palette was modified
-3. Confirm with user before committing
+2. Confirm with user before committing
 
 ---
 
@@ -297,6 +293,5 @@ At the end of a significant session:
 - **No `.gitignore` additions** unless explicitly requested
 - **No over-engineering** — no premature abstractions, no extra error handling for impossible cases, no docstrings on unchanged code
 - **Update planning docs** when making architectural or design decisions
-- **Log color changes** in `.planning/design/color-history.md` before switching palettes
 - **Enums are strings** — `JsonStringEnumConverter` is configured globally; enums serialize as strings in the API
 - **All API calls go through `web/src/api/client.ts`** — do not call axios directly in components
