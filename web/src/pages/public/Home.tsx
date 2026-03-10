@@ -26,19 +26,19 @@ export function Home() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/portal"
-              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
+              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
             >
               Existing Customers
             </Link>
             <Link
               to="/apply"
-              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
+              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
             >
               View Live Rates
             </Link>
             <Link
               to="/apply"
-              className="bg-[#C9A84C] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:bg-[#A8893D] transition-colors uppercase"
+              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
             >
               Apply Now
             </Link>
@@ -47,7 +47,7 @@ export function Home() {
       </section>
 
       {/* Bottom info strip */}
-      <div className="bg-[#C9A84C] text-white py-3 px-4 flex items-center justify-between text-sm">
+      <div className="bg-gradient-to-r from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white py-3 px-4 flex items-center justify-between text-sm">
         <span className="text-amber-100">
           Don't have an online account?{' '}
           <Link to="/apply" className="underline text-white hover:text-amber-200">
@@ -159,7 +159,7 @@ export function Home() {
           </p>
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 bg-[#C9A84C] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#A8893D] transition-colors uppercase tracking-widest text-sm"
+            className="inline-flex items-center gap-2 bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-4 rounded-full font-semibold hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase tracking-widest text-sm"
           >
             Apply Now
           </Link>

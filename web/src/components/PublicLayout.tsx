@@ -33,7 +33,7 @@ export function PublicLayout() {
             </Link>
             <Link
               to="/apply"
-              className="bg-[#C9A84C] text-white px-4 py-1.5 rounded text-sm font-semibold hover:bg-[#A8893D] transition-colors"
+              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-4 py-1.5 rounded text-sm font-semibold hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all"
             >
               REGISTER
             </Link>
