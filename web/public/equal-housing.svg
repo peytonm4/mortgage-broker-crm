@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+  <!-- Outer border -->
+  <rect x="1" y="1" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- House roof -->
+  <path d="M25 8 L8 22 L42 22 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- House body -->
+  <rect x="12" y="22" width="26" height="18" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Equals sign -->
+  <line x1="18" y1="29" x2="32" y2="29" stroke="currentColor" stroke-width="2"/>
+  <line x1="18" y1="35" x2="32" y2="35" stroke="currentColor" stroke-width="2"/>
+  <!-- Text below -->
+  <text x="25" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="3.5" fill="currentColor">EQUAL HOUSING</text>
+  <text x="25" y="51" text-anchor="middle" font-family="Arial, sans-serif" font-size="3.5" fill="currentColor">OPPORTUNITY</text>
+</svg>

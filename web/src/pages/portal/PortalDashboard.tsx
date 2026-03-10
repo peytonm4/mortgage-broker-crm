@@ -474,12 +474,12 @@ export function PortalDashboard() {
                 <HelpCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
                 <p className="text-xs text-muted-foreground">
                   To submit documents, please contact us at{' '}
-                  <a href="tel:5551234567" className="font-medium text-primary hover:underline">
-                    (555) 123-4567
+                  <a href="tel:6236942206" className="font-medium text-primary hover:underline">
+                    623-694-2206
                   </a>{' '}
                   or email{' '}
-                  <a href="mailto:support@onecommunity.mortgage" className="font-medium text-primary hover:underline">
-                    support@onecommunity.mortgage
+                  <a href="mailto:austin@azmtg.net" className="font-medium text-primary hover:underline">
+                    austin@azmtg.net
                   </a>
                   . Online upload coming soon.
                 </p>
@@ -559,13 +559,13 @@ export function PortalDashboard() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Button variant="outline" asChild>
-              <a href="tel:5551234567">
+              <a href="tel:6236942206">
                 <Phone className="h-4 w-4 mr-2" />
-                (555) 123-4567
+                623-694-2206
               </a>
             </Button>
             <Button variant="outline" asChild>
-              <a href="mailto:support@onecommunity.mortgage">
+              <a href="mailto:austin@azmtg.net">
                 <Mail className="h-4 w-4 mr-2" />
                 Email Support
               </a>

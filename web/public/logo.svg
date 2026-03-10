@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 50" fill="none">
+  <!-- Use the actual PNG logo mark -->
+  <image href="/logo_gold_isolated.png" x="0" y="3" width="44" height="44"/>
+  <!-- Brand Text -->
+  <text x="54" y="22" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#C9A84C">ONE COMMUNITY</text>
+  <text x="170" y="40" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="13" letter-spacing="3" fill="#C9A84C">MORT</text>
+  <text x="215" y="40" font-family="Georgia, 'Times New Roman', serif" font-weight="400" font-size="13" letter-spacing="3" fill="#C9A84C">GAGE</text>
+</svg>

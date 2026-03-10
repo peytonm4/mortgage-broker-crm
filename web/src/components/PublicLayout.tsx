@@ -1,16 +1,18 @@
 import { Link, Outlet } from 'react-router-dom'
-import { Phone, Mail } from 'lucide-react'
+import { Phone, Mail, MapPin } from 'lucide-react'
 
 export function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top bar — logo + login */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-serif font-bold tracking-widest text-[#0B1D3A] uppercase">
-              One Community Mortgage
-            </span>
+            <img src="/logo_gold_isolated.png" alt="" className="h-9" />
+            <div className="leading-tight">
+              <span className="text-sm font-serif font-bold tracking-wider text-[#0B1D3A] block">ONE COMMUNITY</span>
+              <span className="text-[10px] font-serif tracking-[0.25em] text-[#0B1D3A] block"><span className="font-bold">MORTGAGE</span></span>
+            </div>
           </Link>
           <div className="flex items-center gap-3">
             <input
@@ -70,7 +72,13 @@ export function PublicLayout() {
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <span className="font-serif font-bold text-lg tracking-widest uppercase">One Community Mortgage</span>
+              <div className="flex items-center gap-2 mb-3">
+                <img src="/logo_gold_isolated.png" alt="" className="h-9" />
+                <div className="leading-tight">
+                  <span className="text-sm font-serif font-bold tracking-wider text-[#C9A84C] block">ONE COMMUNITY</span>
+                  <span className="text-[10px] font-serif tracking-[0.25em] text-[#C9A84C] block"><span className="font-bold">MORT</span>GAGE</span>
+                </div>
+              </div>
               <p className="text-sm text-[#C8D5E3] mt-3">
                 Your trusted mortgage partner for home purchases, refinancing, and more.
               </p>
@@ -94,18 +102,36 @@ export function PublicLayout() {
               <h4 className="font-semibold mb-4 text-sm tracking-wider uppercase">Contact</h4>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2 text-[#C8D5E3]">
-                  <Phone className="h-4 w-4" />
-                  (555) 123-4567
+                  <Phone className="h-4 w-4 shrink-0" />
+                  623-694-2206
                 </li>
                 <li className="flex items-center gap-2 text-[#C8D5E3]">
-                  <Mail className="h-4 w-4" />
-                  info@onecommunity.mortgage
+                  <Mail className="h-4 w-4 shrink-0" />
+                  austin@azmtg.net
+                </li>
+                <li className="flex items-start gap-2 text-[#C8D5E3]">
+                  <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
+                  <span>701 E Carefree Highway<br />Phoenix, AZ 85085</span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-[#0B1D3A] mt-8 pt-8 text-center text-sm text-[#C8D5E3]">
-            © {new Date().getFullYear()} One Community Mortgage. All rights reserved. NMLS #123456
+          {/* Equal Housing & Copyright */}
+          <div className="border-t border-[#0B1D3A] mt-8 pt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3 text-[#C8D5E3]">
+                <img src="/equal-housing.svg" alt="Equal Housing Opportunity" className="h-8 w-8 invert opacity-70" />
+                <span className="text-xs leading-tight">
+                  Equal Housing Opportunity.<br />
+                  All loans subject to credit approval.
+                </span>
+              </div>
+              <p className="text-sm text-[#C8D5E3] text-center sm:text-right">
+                © {new Date().getFullYear()} One Community Mortgage. All rights reserved.
+                <br />
+                <span className="text-xs">Company NMLS#158494 | BK#0910039</span>
+              </p>
+            </div>
           </div>
         </div>
       </footer>

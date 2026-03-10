@@ -1,5 +1,5 @@
 import { NavLink, Outlet, Link } from 'react-router-dom'
-import { LayoutDashboard, Users, UserPlus, Home, FileStack, ExternalLink, CheckCircle } from 'lucide-react'
+import { LayoutDashboard, Users, UserPlus, FileStack, ExternalLink, CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -15,9 +15,14 @@ export function Layout() {
     <div className="flex h-screen bg-muted/30">
       {/* Sidebar */}
       <aside className="w-64 border-r bg-background flex flex-col">
-        <div className="flex h-16 items-center border-b px-6">
-          <Home className="h-6 w-6 text-primary" />
-          <span className="ml-2 text-lg font-semibold">One Community CRM</span>
+        <div className="flex h-16 items-center border-b px-4">
+          <div className="flex items-center gap-2">
+            <img src="/logo_gold_isolated.png" alt="" className="h-8" />
+            <div className="leading-tight">
+              <span className="text-xs font-serif font-bold tracking-wider text-[#0B1D3A] block">ONE COMMUNITY</span>
+              <span className="text-[8px] font-serif tracking-[0.2em] text-[#0B1D3A] block"><span className="font-bold">MORT</span>GAGE</span>
+            </div>
+          </div>
         </div>
         <nav className="p-4 space-y-1 flex-1">
           {navItems.map((item) => (

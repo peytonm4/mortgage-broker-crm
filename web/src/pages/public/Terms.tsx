@@ -86,7 +86,7 @@ export function Terms() {
           <h2 className="text-xl font-semibold mb-3">Governing Law</h2>
           <p className="text-muted-foreground">
             These Terms of Service shall be governed by and construed in accordance with the laws
-            of the State of Texas, without regard to its conflict of law provisions.
+            of the State of Arizona, without regard to its conflict of law provisions.
           </p>
         </section>
 
@@ -96,11 +96,11 @@ export function Terms() {
             For questions about these Terms of Service, please contact us at:
           </p>
           <p className="text-muted-foreground mt-2">
-            Email: legal@onecommunity.mortgage
+            Email: austin@azmtg.net
             <br />
-            Phone: (555) 123-4567
+            Phone: 623-694-2206
             <br />
-            Address: 123 Main Street, Austin, TX 78701
+            Address: 701 E Carefree Highway, Phoenix, AZ 85085
           </p>
         </section>
       </div>

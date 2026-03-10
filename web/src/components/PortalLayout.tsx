@@ -25,8 +25,7 @@ export function PortalLayout() {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center gap-2 text-primary-foreground">
-              <Home className="h-6 w-6" />
-              <span className="text-xl font-bold">One Community Mortgage</span>
+              <img src="/logo_gold_isolated.png" alt="One Community Mortgage" className="h-8" />
             </Link>
             <span className="hidden sm:inline text-primary-foreground/60">|</span>
             <span className="hidden sm:inline text-sm font-medium text-primary-foreground/90">

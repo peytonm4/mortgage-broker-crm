@@ -73,11 +73,11 @@ export function Privacy() {
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
           <p className="text-muted-foreground mt-2">
-            Email: privacy@onecommunity.mortgage
+            Email: austin@azmtg.net
             <br />
-            Phone: (555) 123-4567
+            Phone: 623-694-2206
             <br />
-            Address: 123 Main Street, Austin, TX 78701
+            Address: 701 E Carefree Highway, Phoenix, AZ 85085
           </p>
         </section>
       </div>

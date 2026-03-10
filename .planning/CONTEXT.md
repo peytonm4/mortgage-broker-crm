@@ -91,6 +91,18 @@ See `.planning/design/color-history.md` for full details.
 - Email domains changed: `homeloanpro.com` → `onecommunity.mortgage`
 - See `.planning/design/color-history.md` for full Palette 4 details
 
+#### Logo, Contact Info & Equal Housing
+- **Logo integration:** Replaced all SVG logo mark attempts with actual `logo_gold_isolated.png` (user-provided PNG) across all three layouts (PublicLayout, PortalLayout, Layout). Logo displayed alongside serif "ONE COMMUNITY / MORTGAGE" text.
+- **Equal Housing Opportunity:** Added EHO icon (`equal-housing.svg`) and disclaimer text to PublicLayout footer — standard for mortgage companies, confirmed on actual business cards.
+- **Real contact info applied** from Austin's business card PDF:
+  - Phone: 623-694-2206
+  - Email: austin@azmtg.net
+  - Address: 701 E Carefree Highway, Phoenix, AZ 85085
+  - Company NMLS#158494 | BK#0910039
+  - Governing law: Arizona (Terms.tsx)
+- **Files updated:** PublicLayout.tsx, PortalLayout.tsx, Layout.tsx, PortalDashboard.tsx, Privacy.tsx, Terms.tsx
+- **New files:** `web/public/logo_gold_isolated.png`, `web/public/equal-housing.svg`, `web/public/logo.svg`, `web/public/logo-dark.svg` (SVGs no longer referenced), `web/public/AustinBusinessCardOption.pdf`, `docs/MVP-UI-Documentation.md`
+
 ---
 
 ## Planning Docs
