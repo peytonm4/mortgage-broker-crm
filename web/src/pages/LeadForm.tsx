@@ -81,19 +81,20 @@ export function LeadForm() {
     }
   }, [lead, reset])
 
+  const toLeadPayload = (data: LeadFormData) => ({
+    firstName: data.firstName,
+    lastName: data.lastName,
+    partnerId: data.partnerId || null,
+    email: data.email || null,
+    phone: data.phone || null,
+    loanType: data.loanType,
+    loanAmount: data.loanAmount ? parseFloat(data.loanAmount) : null,
+    propertyAddress: data.propertyAddress || null,
+    notes: data.notes || null,
+  })
+
   const createMutation = useMutation({
-    mutationFn: (data: LeadFormData) =>
-      leadsApi.create({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        partnerId: data.partnerId || null,
-        email: data.email || null,
-        phone: data.phone || null,
-        loanType: data.loanType,
-        loanAmount: data.loanAmount ? parseFloat(data.loanAmount) : null,
-        propertyAddress: data.propertyAddress || null,
-        notes: data.notes || null,
-      }),
+    mutationFn: (data: LeadFormData) => leadsApi.create(toLeadPayload(data)),
     onSuccess: (result) => {
       queryClient.invalidateQueries({ queryKey: ['leads'] })
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] })
@@ -102,18 +103,7 @@ export function LeadForm() {
   })
 
   const updateMutation = useMutation({
-    mutationFn: (data: LeadFormData) =>
-      leadsApi.update(id!, {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        partnerId: data.partnerId || null,
-        email: data.email || null,
-        phone: data.phone || null,
-        loanType: data.loanType,
-        loanAmount: data.loanAmount ? parseFloat(data.loanAmount) : null,
-        propertyAddress: data.propertyAddress || null,
-        notes: data.notes || null,
-      }),
+    mutationFn: (data: LeadFormData) => leadsApi.update(id!, toLeadPayload(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['lead', id] })
       queryClient.invalidateQueries({ queryKey: ['leads'] })

@@ -15,19 +15,7 @@ import {
   AlertCircle,
   FileQuestion,
 } from 'lucide-react'
-
-const STATUS_CONFIG: Record<
-  string,
-  { label: string; color: string }
-> = {
-  Draft: { label: 'Draft', color: 'bg-gray-100 text-gray-800' },
-  Received: { label: 'Received', color: 'bg-blue-100 text-blue-800' },
-  InReview: { label: 'In Review', color: 'bg-yellow-100 text-yellow-800' },
-  NeedsDocs: { label: 'Documents Needed', color: 'bg-orange-100 text-orange-800' },
-  Submitted: { label: 'Submitted to Lender', color: 'bg-purple-100 text-purple-800' },
-  Closed: { label: 'Closed', color: 'bg-green-100 text-green-800' },
-  Denied: { label: 'Denied', color: 'bg-red-100 text-red-800' },
-}
+import { APPLICATION_STATUS_CONFIG } from '@/lib/constants'
 
 export function ApplicationView() {
   const [searchParams] = useSearchParams()
@@ -83,7 +71,7 @@ export function ApplicationView() {
   }
 
   const borrower = application.borrower
-  const statusConfig = STATUS_CONFIG[application.status] || STATUS_CONFIG.Draft
+  const statusConfig = APPLICATION_STATUS_CONFIG[application.status] || APPLICATION_STATUS_CONFIG['Draft']
 
   // Build timeline events
   const timelineEvents: { label: string; date: string; icon: React.ComponentType<{ className?: string }>; color: string }[] = [

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CheckCircle, Clock, Shield, Users } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { GOLD_PILL_CLASSES, GOLD_BUTTON_CLASSES } from '@/lib/constants'
 
 export function Home() {
   return (
@@ -26,19 +27,19 @@ export function Home() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/portal"
-              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
+              className={GOLD_PILL_CLASSES}
             >
               Existing Customers
             </Link>
             <Link
               to="/apply"
-              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
+              className={GOLD_PILL_CLASSES}
             >
               View Live Rates
             </Link>
             <Link
               to="/apply"
-              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-3 rounded-full font-semibold text-sm tracking-widest hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase"
+              className={GOLD_PILL_CLASSES}
             >
               Apply Now
             </Link>
@@ -159,7 +160,7 @@ export function Home() {
           </p>
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-8 py-4 rounded-full font-semibold hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all uppercase tracking-widest text-sm"
+            className={`inline-flex items-center gap-2 ${GOLD_BUTTON_CLASSES} px-8 py-4 rounded-full font-semibold text-sm tracking-widest uppercase`}
           >
             Apply Now
           </Link>

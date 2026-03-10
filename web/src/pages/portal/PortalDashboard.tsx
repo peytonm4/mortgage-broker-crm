@@ -29,8 +29,9 @@ import {
   FileCheck,
   CreditCard,
 } from 'lucide-react'
+import { APPLICATION_STATUS_CONFIG, RESPONSIBLE_PARTY_LABELS } from '@/lib/constants'
 
-// ─── Status config ───────────────────────────────────────────────────────────
+// ─── Portal-specific status config (extends base with icon + subtitle) ──────
 
 const STATUS_CONFIG: Record<
   string,
@@ -42,44 +43,37 @@ const STATUS_CONFIG: Record<
   }
 > = {
   Draft: {
-    label: 'Draft',
-    color: 'bg-gray-100 text-gray-800',
+    ...APPLICATION_STATUS_CONFIG['Draft'],
     icon: FileText,
     subtitle: 'Your application is still in draft.',
   },
   Received: {
-    label: 'Received',
-    color: 'bg-blue-100 text-blue-800',
+    ...APPLICATION_STATUS_CONFIG['Received'],
     icon: Clock,
     subtitle: "We've received your application and are getting started.",
   },
   InReview: {
-    label: 'In Review',
-    color: 'bg-yellow-100 text-yellow-800',
+    ...APPLICATION_STATUS_CONFIG['InReview'],
     icon: Clock,
     subtitle: 'Your application is being reviewed by our team.',
   },
   NeedsDocs: {
-    label: 'Documents Needed',
-    color: 'bg-orange-100 text-orange-800',
+    ...APPLICATION_STATUS_CONFIG['NeedsDocs'],
     icon: FileQuestion,
     subtitle: 'We need a few documents from you to continue.',
   },
   Submitted: {
-    label: 'Submitted to Lender',
-    color: 'bg-purple-100 text-purple-800',
+    ...APPLICATION_STATUS_CONFIG['Submitted'],
     icon: CheckCircle,
     subtitle: 'Your application has been sent to the lender for final review.',
   },
   Closed: {
-    label: 'Closed',
-    color: 'bg-green-100 text-green-800',
+    ...APPLICATION_STATUS_CONFIG['Closed'],
     icon: CheckCircle,
     subtitle: 'Congratulations! Your loan has been funded.',
   },
   Denied: {
-    label: 'Denied',
-    color: 'bg-red-100 text-red-800',
+    ...APPLICATION_STATUS_CONFIG['Denied'],
     icon: AlertCircle,
     subtitle: 'Unfortunately, your application was not approved.',
   },
@@ -423,13 +417,7 @@ export function PortalDashboard() {
               {allDocs.map((doc) => {
                 const isPending = doc.status === 'Pending'
                 const DocIcon = DOC_ICON[doc.category] || FileText
-                const partyLabels: Record<string, string> = {
-                  Borrower: 'You',
-                  Broker: 'Broker',
-                  TitleCompany: 'Title Company',
-                  Appraiser: 'Appraiser',
-                }
-                const partyLabel = partyLabels[doc.responsibleParty] || doc.responsibleParty
+                const partyLabel = RESPONSIBLE_PARTY_LABELS[doc.responsibleParty] || doc.responsibleParty
 
                 return (
                   <li

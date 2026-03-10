@@ -9,7 +9,7 @@ import { StatusDropdown } from '@/components/staff/StatusDropdown'
 import { DocRequestModal } from '@/components/staff/DocRequestModal'
 import { DocRequestList } from '@/components/staff/DocRequestList'
 import { ArrowLeft, FileText, Plus } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, formatCurrency } from '@/lib/utils'
 
 type TabType = 'overview' | 'documents'
 
@@ -72,14 +72,6 @@ export function ApplicationDetail() {
     { id: 'overview' as const, label: 'Overview', icon: FileText, count: undefined },
     { id: 'documents' as const, label: 'Documents', icon: FileText, count: application.pendingDocRequestCount },
   ]
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(amount)
-  }
 
   return (
     <div className="p-8 space-y-6">

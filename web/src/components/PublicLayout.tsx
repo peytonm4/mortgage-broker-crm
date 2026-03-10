@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
 import { Phone, Mail, MapPin } from 'lucide-react'
+import { GOLD_BUTTON_CLASSES } from '@/lib/constants'
 
 export function PublicLayout() {
   return (
@@ -33,7 +34,7 @@ export function PublicLayout() {
             </Link>
             <Link
               to="/apply"
-              className="bg-gradient-to-br from-[#D4B85C] via-[#C9A84C] to-[#B89530] text-white px-4 py-1.5 rounded text-sm font-semibold hover:from-[#C9A84C] hover:via-[#B89530] hover:to-[#A8893D] transition-all"
+              className={`${GOLD_BUTTON_CLASSES} px-4 py-1.5 rounded text-sm font-semibold`}
             >
               REGISTER
             </Link>
