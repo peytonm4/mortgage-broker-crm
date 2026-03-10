@@ -103,6 +103,12 @@ See `.planning/design/color-history.md` for full details.
 - **Files updated:** PublicLayout.tsx, PortalLayout.tsx, Layout.tsx, PortalDashboard.tsx, Privacy.tsx, Terms.tsx
 - **New files:** `web/public/logo_gold_isolated.png`, `web/public/equal-housing.svg`, `web/public/logo.svg`, `web/public/logo-dark.svg` (SVGs no longer referenced), `web/public/AustinBusinessCardOption.pdf`, `docs/MVP-UI-Documentation.md`
 
+#### Metallic Gradient on Gold Buttons
+- Replaced flat `bg-[#C9A84C]` on all gold buttons/strips with a subtle metallic gradient: `from-[#D4B85C] via-[#C9A84C] to-[#B89530]` (champagne → gold → deep gold, matching the logo's sheen)
+- Hover shifts darker: `from-[#C9A84C] via-[#B89530] to-[#A8893D]`
+- Applied to: 3 hero CTA buttons, info strip, CTA section button (Home.tsx), REGISTER button (PublicLayout.tsx)
+- Committed: `fb3047e`
+
 ---
 
 ## Planning Docs
